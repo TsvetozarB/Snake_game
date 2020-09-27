@@ -1,21 +1,21 @@
 'use strict';
 
-const path = require('path');
-const express = require('express');
-const http = require('http');
-const socket = require('socket.io');
-const bodyParser = require('body-parser');
+import { join } from 'path';
+import express, { static } from 'express';
+import { Server } from 'http';
+import socket from 'socket.io';
+import { urlencoded } from 'body-parser';
 
 const app = express();
-const server = http.Server(app);
+const server = Server(app);
 const io = socket(server);
 
 const port = process.env.PORT || 8000;
 
 let color = '#ffffff';
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/', express.static(path.join(__dirname, 'html')));
+app.use(urlencoded({ extended: false }));
+app.use('/', static(join(__dirname, 'html')));
 
 io.on('connection', (s) => {
   console.log('Socket.io client connected');
