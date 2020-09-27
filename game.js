@@ -1,4 +1,16 @@
 
+let PORT = process.env.PORT || 5000;
+let express = require('express');
+let app = express();
+
+let http = require('http');
+let server = http.Server(app);
+app.use(express.static('client'));
+
+server.listen(PORT, function () {
+    console.log('Server running');
+});
+
 import { update as updateSnake, draw as drawSnake, snake_speed, getSnakeHead, snakeIntersection, scores as snakeEndScore } from './snake.js';
 import { update as updateFood, draw as drawFood } from './food.js';
 import { outsideGrid } from './grid.js';
